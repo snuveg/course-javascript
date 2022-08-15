@@ -1,7 +1,5 @@
 /* ДЗ 3 - работа с исключениями и отладчиком */
 
-import { NoEmitOnErrorsPlugin } from "webpack";
-
 /*
  Задание 1:
 
@@ -20,8 +18,9 @@ import { NoEmitOnErrorsPlugin } from "webpack";
  */
 function isAllTrue(arr, fn) {
   // try {
-  if (!fn instanceof Function) throw new Error('fn is not a function');
-  if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
+  // if (!fn instanceof Function) throw new Error('fn is not a function');
+  if (typeof fn != 'function') throw new Error('fn is not a function');
+  if (arr.length === 0 || !Array.isArray(arr)) throw new Error('empty array');
   for (let i = 0; i < arr.length; i++) {
     if (!fn(arr[i])) return false;
   }
@@ -49,8 +48,9 @@ function isAllTrue(arr, fn) {
  */
 function isSomeTrue(arr, fn) {
   // try {
-  if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
-  if (!fn instanceof Function) throw new Error('fn is not a function');
+  if (arr.length === 0 || !Array.isArray(arr)) throw new Error('empty array');
+  // if (!fn instanceof Function) throw new Error('fn is not a function');
+  if (typeof fn != 'function') throw new Error('fn is not a function');
   for (let i = 0; i < arr.length; i++) {
     if (fn(arr[i])) return true;
   }
@@ -75,7 +75,7 @@ function returnBadArguments(fn, ...args) {
   // try {
   // if (!fn instanceof Function) throw new Error('fn is not a function');
   if (typeof fn != 'function') throw new Error('fn is not a function');
-  let res = [];
+  const res = [];
   for (let i = 0; i < args.length; i++) {
     try {
       fn(args[i]);
@@ -109,7 +109,7 @@ function returnBadArguments(fn, ...args) {
 function calculator(number = 0) {
   // try {
   if (!Number.isFinite(number)) throw new Error('number is not a number');
-  let o = {
+  const o = {
     sum: function () {
       for (let i = 0; i < arguments.length; i++) {
         number += arguments[i];
@@ -124,7 +124,7 @@ function calculator(number = 0) {
     },
     div: function () {
       for (let i = 0; i < arguments.length; i++) {
-        if (arguments[i] == 0) throw new Error('division by 0');
+        if (arguments[i] === 0) throw new Error('division by 0');
         number /= arguments[i];
       }
       return number;
@@ -134,8 +134,8 @@ function calculator(number = 0) {
         number *= arguments[i];
       }
       return number;
-    }
-  }
+    },
+  };
   return o;
   // } catch (e) {
   //   console.log(e.message);
