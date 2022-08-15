@@ -20,12 +20,12 @@ import { NoEmitOnErrorsPlugin } from "webpack";
  */
 function isAllTrue(arr, fn) {
   // try {
-    if (!fn instanceof Function) throw new Error('fn is not a function');
-    if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
-    for (let i = 0; i < arr.length; i++) {
-      if (!fn(arr[i])) return false;
-    }
-    return true;
+  if (!fn instanceof Function) throw new Error('fn is not a function');
+  if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
+  for (let i = 0; i < arr.length; i++) {
+    if (!fn(arr[i])) return false;
+  }
+  return true;
   // } catch (e) {
   //   console.log(e.message);
   // }
@@ -49,12 +49,12 @@ function isAllTrue(arr, fn) {
  */
 function isSomeTrue(arr, fn) {
   // try {
-    if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
-    if (!fn instanceof Function) throw new Error('fn is not a function');
-    for (let i = 0; i < arr.length; i++) {
-      if (fn(arr[i])) return true;
-    }
-    return false;
+  if (arr.length == 0 || !Array.isArray(arr)) throw new Error('empty array');
+  if (!fn instanceof Function) throw new Error('fn is not a function');
+  for (let i = 0; i < arr.length; i++) {
+    if (fn(arr[i])) return true;
+  }
+  return false;
   // } catch (e) {
   //   console.log(e.message);
   // }
@@ -73,17 +73,17 @@ function isSomeTrue(arr, fn) {
  */
 function returnBadArguments(fn, ...args) {
   // try {
-    // if (!fn instanceof Function) throw new Error('fn is not a function');
-    if (typeof fn != 'function') throw new Error('fn is not a function');
-    let res = [];
-    for (let i = 0; i < args.length; i++) {
-      try {
-        fn(args[i]);
-      } catch {
-        res.push(args[i]);
-      }
+  // if (!fn instanceof Function) throw new Error('fn is not a function');
+  if (typeof fn != 'function') throw new Error('fn is not a function');
+  let res = [];
+  for (let i = 0; i < args.length; i++) {
+    try {
+      fn(args[i]);
+    } catch {
+      res.push(args[i]);
     }
-    return res;
+  }
+  return res;
   // } catch (e) {
   //   console.log(e.message);
   // }
@@ -108,35 +108,35 @@ function returnBadArguments(fn, ...args) {
  */
 function calculator(number = 0) {
   // try {
-    if (!Number.isFinite(number)) throw new Error('number is not a number');
-    let o = {
-      sum: function () {
-        for (let i = 0; i < arguments.length; i++) {
-          number += arguments[i];
-        }
-        return number;
-      },
-      dif: function () {
-        for (let i = 0; i < arguments.length; i++) {
-          number -= arguments[i];
-        }
-        return number;
-      },
-      div: function () {
-        for (let i = 0; i < arguments.length; i++) {
-          if (arguments[i] == 0) throw new Error('division by 0');
-          number /= arguments[i];
-        }
-        return number;
-      },
-      mul: function () {
-        for (let i = 0; i < arguments.length; i++) {
-          number *= arguments[i];
-        }
-        return number;
+  if (!Number.isFinite(number)) throw new Error('number is not a number');
+  let o = {
+    sum: function () {
+      for (let i = 0; i < arguments.length; i++) {
+        number += arguments[i];
       }
+      return number;
+    },
+    dif: function () {
+      for (let i = 0; i < arguments.length; i++) {
+        number -= arguments[i];
+      }
+      return number;
+    },
+    div: function () {
+      for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i] == 0) throw new Error('division by 0');
+        number /= arguments[i];
+      }
+      return number;
+    },
+    mul: function () {
+      for (let i = 0; i < arguments.length; i++) {
+        number *= arguments[i];
+      }
+      return number;
     }
-    return o;
+  }
+  return o;
   // } catch (e) {
   //   console.log(e.message);
   // }
