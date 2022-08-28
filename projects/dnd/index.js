@@ -18,44 +18,42 @@
 import './dnd.html';
 
 const homeworkContainer = document.querySelector('#app');
+let currentDrag;
+let startX = 0;
+let startY = 0;
+
+function rnd(from, to) {
+  return parseInt(from + Math.random() * (to - from));
+}
 
 document.addEventListener('mousemove', (e) => {
-  const dd = e.target;
-  if (dd.contains('draggable-div')) {
-    // dd.addEventListener - ctrl+c из интернета
-    dd.addEventListener('mousedown', function (evt) {
-      evt.preventDefault();
-
-      let xStart = evt.clientX;
-      let yStart = evt.clientY;
-      const onMouseMove = function (evtMove) {
-        evtMove.preventDefault();
-
-        const xNew = xStart - evtMove.clientX;
-        const yNew = yStart - evtMove.clientY;
-        xStart = evtMove.clientX;
-        yStart = evtMove.clientY;
-        dd.style.top = dd.offsetTop - yNew + 'px';
-        dd.style.left = dd.offsetLeft - xNew + 'px';
-      };
-      const onMouseUp = function (evtUp) {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-      };
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    });
+  if (currentDrag) {
+    currentDrag.style.left = e.clientX - startX + 'px';
+    currentDrag.style.top = e.clientY - startY + 'px';
   }
 });
 
 export function createDiv() {
+  const minSize = 100;
+  const maxSize = 1000;
+  const minColor = 0;
+  const maxColor = 0xffffff;
   const div = document.createElement('div');
+
   div.classList.add('draggable-div');
-  div.style.background = 'red';
-  div.style.top = '10px';
-  div.style.left = '20px';
-  div.style.width = '30px';
-  div.style.height = '40px';
+  div.style.background = '#' + rnd(minColor, maxColor).toString(16);
+  div.style.top = rnd(0, window.innerHeight) + 'px';
+  div.style.left = rnd(0, window.innerWidth) + 'px';
+  div.style.width = rnd(minSize, maxSize) + 'px';
+  div.style.height = rnd(minSize, maxSize) + 'px';
+
+  div.addEventListener('mousedown', (e) => {
+    currentDrag = div;
+    startX = e.offsetX;
+    startY = e.offsetY;
+  });
+  div.addEventListener('mouseup', () => (currentDrag = false));
+
   return div;
 }
 
