@@ -65,6 +65,10 @@ function delegate(target, fn) {
   });
 }
 
+{
+  true;
+}
+
 /*
  Задание 7:
 
@@ -75,11 +79,11 @@ function delegate(target, fn) {
    once(document.querySelector('button'), () => console.log('обработчик выполнился!')) // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
-  target.addEventListener('click', rm);
-  function rm() {
-    fn();
-    target.removeEventListener('click', rm);
-  }
+  target.addEventListener('click', fn, { once: true });
+  // function rm() {
+  //   fn();
+  //   target.removeEventListener('click', rm);
+  // }
 }
 
 export { addListener, removeListener, skipDefault, emulateClick, delegate, once };
