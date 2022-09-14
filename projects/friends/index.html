@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Выберите друзей</h1>
+    </div>
+    <div class="sub">
+      <div class="side">
+        <input id="t1" type="text">
+        <h2>Ваши друзья</h2>
+        <div id="result" class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);"></div>
+      </div>
+      <div class="side">
+        <input id="t2" type="text">
+        <h2>Друзья в списке</h2>
+        <div id="result2" class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+          <!-- <div class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);"></div> -->
+        </div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+  <script id="user-template" type="text/x-handlebars-template">
+    <!-- <div class="friends"> -->
+      {{#each items}}
+      <div class="friend" id="{{first_name}} {{last_name}}" draggable="true" ondragstart="onDragStart(event);">
+        <img src="{{photo_100}}" draggable="false">
+        <div id="name">{{first_name}} {{last_name}}</div>
+      </div>
+      {{/each}}
+    <!-- </div> -->
+  </script>
+  <script src="./main.js"></script>
+</body>
+</html>

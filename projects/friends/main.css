@@ -1,0 +1,72 @@
+body {
+  background: #E5E5E5;
+  position: absolute;
+}
+.container {
+  position: relative;
+  width: 700px;
+  height: 500px;
+  background: #FFF;
+  border-radius: 10px;
+  flex-direction: column;
+}
+.sub {
+  display: flex;
+  align-items: stretch;
+}
+.side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header {
+  background: #FE8663;
+  padding: 10px;
+}
+h1, h2 {
+    margin: 0;
+}
+.footer {
+  height: 45px;
+  background: #F0F0F0;
+}
+input {
+  border-radius: 13px;
+  height: 26px;
+  width: 90%;
+  margin: 10px;
+  padding-left: 10px;
+}
+#result, #result2 {
+  width: 100%;
+}
+.friends {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  height: 384px;
+  justify-content: start;
+  width: 100%;
+}
+.friend {
+  display: flex;
+  width: 280px;
+  text-align: center;
+  margin: 12px;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5px;
+}
+.friend:hover {
+  background: #F0F0F0;
+  cursor: pointer;
+}
+img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+}
+.hidden{
+  display: none;
+}
