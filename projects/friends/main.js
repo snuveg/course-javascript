@@ -29,10 +29,8 @@ function callAPI(method, params) {
 }
 
 function updateFilter(val, divs) {
-  // console.log(divs);
   for (const div of divs) {
     if (isMatching(div.id, val)) {
-      // console.log(div);
       div.classList.remove('hidden');
     } else {
       div.classList.add('hidden');
@@ -52,17 +50,14 @@ function onDragOver(event) {
 function onDrop(event) {
   const id = event.dataTransfer.getData('text/plain');
   const draggableElement = document.getElementById(id);
-  const dropzone = () => { if (event.target.className == 'friends') return event.target; } //event.target;
+  const dropzone = event.currentTarget;
+  //  () => { if (event.target.className == 'friends') return event.target; } //event.target;
   dropzone.appendChild(draggableElement);
   event.dataTransfer.clearData();
   init();
 }
 
 function init() {
-  // const friendsDivs = document.querySelector('#result').querySelectorAll('.friend');
-  // const friendsDivs2 = document.querySelector('#result2').querySelectorAll('.friend');
-  // filterInput.addEventListener('input', function () { updateFilter(this.value, friendsDivs); });
-  // filterInput2.addEventListener('input', function () { updateFilter(this.value, friendsDivs2); });
   filterInput.oninput = function () { updateFilter(this.value, res.querySelectorAll('.friend')); };
   filterInput2.oninput = function () { updateFilter(this.value, res2.querySelectorAll('.friend')); };
 }
