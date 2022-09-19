@@ -52,7 +52,7 @@ function onDragOver(event) {
 function onDrop(event) {
   const id = event.dataTransfer.getData('text/plain');
   const draggableElement = document.getElementById(id);
-  const dropzone = event.target;
+  const dropzone = () => { if (event.target.className == 'friends') return event.target; } //event.target;
   dropzone.appendChild(draggableElement);
   event.dataTransfer.clearData();
   init();
@@ -71,6 +71,7 @@ const filterInput = document.querySelector('#t1');
 const filterInput2 = document.querySelector('#t2');
 const res = document.querySelector('#result');
 const res2 = document.querySelector('#result2');
+const friDiv = document.querySelector('.friends');
 
 (async () => {
   try {
