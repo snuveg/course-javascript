@@ -18,24 +18,27 @@
       <div class="side">
         <input id="t1" type="text">
         <h2>Ваши друзья</h2>
-        <div id="result" class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);"></div>
+        <div id="result"></div>
       </div>
       <div class="side">
         <input id="t2" type="text">
         <h2>Друзья в списке</h2>
-        <div id="result2" class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+        <div id="result2">
+          <div class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);"></div>
         </div>
       </div>
     </div>
     <div class="footer"></div>
   </div>
   <script id="user-template" type="text/x-handlebars-template">
+    <div class="friends" ondragover="onDragOver(event);" ondrop="onDrop(event);">
       {{#each items}}
       <div class="friend" id="{{first_name}} {{last_name}}" draggable="true" ondragstart="onDragStart(event);">
         <img src="{{photo_100}}" draggable="false">
         <div id="name">{{first_name}} {{last_name}}</div>
       </div>
       {{/each}}
+    </div>
   </script>
   <script src="./main.js"></script>
 </body>

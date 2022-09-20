@@ -54,7 +54,6 @@ function onDrop(event) {
   dropzone.appendChild(draggableElement);
   event.dataTransfer.clearData();
   localStorage.setItem('vk', JSON.stringify(result2.innerHTML));
-  
   init();
 }
 
@@ -68,10 +67,9 @@ function localFilter() {
   const r2 = result2.querySelectorAll('.friend');
   for (const f1 of r1) {
     for (const f2 of r2) {
-      console.log(f1);
       if (f1.id === f2.id) {
-        r1.removeChild(f1);
-        console.log(f1);
+        const p = f1.closest('#result');
+        p.removeChild(f1);
         continue;
       }
     }
