@@ -51,32 +51,48 @@ function onDrop(event) {
   const id = event.dataTransfer.getData('text/plain');
   const draggableElement = document.getElementById(id);
   const dropzone = event.currentTarget;
-  //  () => { if (event.target.className == 'friends') return event.target; } //event.target;
   dropzone.appendChild(draggableElement);
   event.dataTransfer.clearData();
+  localStorage.setItem('vk', JSON.stringify(result2.innerHTML));
+  
   init();
 }
 
 function init() {
-  filterInput.oninput = function () { updateFilter(this.value, res.querySelectorAll('.friend')); };
-  filterInput2.oninput = function () { updateFilter(this.value, res2.querySelectorAll('.friend')); };
+  filterInput.oninput = function () { updateFilter(this.value, result.querySelectorAll('.friend')); };
+  filterInput2.oninput = function () { updateFilter(this.value, result2.querySelectorAll('.friend')); };
+}
+
+function localFilter() {
+  const r1 = result.querySelectorAll('.friend');
+  const r2 = result2.querySelectorAll('.friend');
+  for (const f1 of r1) {
+    for (const f2 of r2) {
+      console.log(f1);
+      if (f1.id === f2.id) {
+        r1.removeChild(f1);
+        console.log(f1);
+        continue;
+      }
+    }
+  }
 }
 
 const filterInput = document.querySelector('#t1');
 const filterInput2 = document.querySelector('#t2');
-const res = document.querySelector('#result');
-const res2 = document.querySelector('#result2');
-const friDiv = document.querySelector('.friends');
+const result = document.querySelector('#result');
+const result2 = document.querySelector('#result2');
 
 (async () => {
   try {
     await auth();
     const friends = await callAPI('friends.get', { fields: 'photo_100' });
     const template = document.querySelector('#user-template').textContent;
-    const result = document.querySelector('#result');
     const render = Handlebars.compile(template);
     const html = render(friends);
     result.innerHTML = html;
+    result2.innerHTML = JSON.parse(localStorage.vk);
+    localFilter();
     init();
   } catch (e) {
     console.log(e.message);
